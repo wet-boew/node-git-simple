@@ -1,0 +1,30 @@
+{
+  "name": "node-git-simple",
+  "version": "0.0.0",
+  "description": "Simple wrapper for the git command line",
+  "main": "git.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wet-boew/node-git-simple.git"
+  },
+  "author": "Laurent Goderre <laurent.goderre@gmail.com> (http://github.com/LaurentGoderre)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wet-boew/node-git-simple/issues"
+  },
+  "homepage": "https://github.com/wet-boew/node-git-simple",
+  "dependencies": {
+    "q": "^1.0.1"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-simple-mocha": "^0.4.0",
+    "load-grunt-tasks": "^0.6.0",
+    "mocha": "^1.21.4"
+  }
+}

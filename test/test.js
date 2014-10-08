@@ -1,0 +1,3 @@
+describe('Simple Git', function () {
+
+});
