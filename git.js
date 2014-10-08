@@ -69,3 +69,20 @@ module.exports.create = function(cwd, bare) {
             }, errorLog);
     }
 };
+
+module.exports.clone = function(cwd, repo) {
+    var deferred = Q.defer();
+
+    new Git(cwd).exec('clone', repo)
+    .then(function(repo) {
+        var clone = new Git(path.resolve(cwd, repo.lastCommand.stderr.match(/Cloning into '(.*)'/)[1]));
+        clone.lastCommand = repo.lastCommand;
+
+        deferred.resolve(clone);
+
+    }, function(err) {
+        deferred.reject((err));
+    });
+
+    return deferred.promise;
+};
