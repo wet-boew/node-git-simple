@@ -1,6 +1,6 @@
 {
   "name": "node-git-simple",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Simple wrapper for the git command line",
   "main": "git.js",
   "scripts": {
