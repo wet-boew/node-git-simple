@@ -9,14 +9,14 @@ function errorLog(error) {
 }
 
 function Git(cwd) {
+    if (!fs.existsSync(cwd)) {
+        throw new Error('Path \'' + cwd + '\' not found');
+    }
     this.cwd = path.resolve(cwd);
 }
 
 Git.prototype.exec = function () {
     var that = this;
-    if (!fs.existsSync(this.cwd)) {
-        throw new Error('Path \'' + that.cwd + '\' not found');
-    }
 
     var deferred = Q.defer(),
         args = Array.prototype.slice.call(arguments),
@@ -70,10 +70,16 @@ module.exports.create = function(cwd, bare) {
     }
 };
 
-module.exports.clone = function(cwd, repo) {
-    var deferred = Q.defer();
+module.exports.clone = function(cwd, repo, dest) {
+    var deferred = Q.defer(),
+        args = ['clone', repo],
+        working = new Git(cwd);
 
-    new Git(cwd).exec('clone', repo)
+    if (dest !== undefined) {
+        args.push(dest);
+    }
+
+    working.exec.apply(working, args)
     .then(function(repo) {
         var clone = new Git(path.resolve(cwd, repo.lastCommand.stderr.match(/Cloning into '(.*)'/)[1]));
         clone.lastCommand = repo.lastCommand;
