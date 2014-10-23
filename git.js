@@ -38,13 +38,19 @@ Git.prototype.exec = function () {
     });
 
     process.on('close', function (code) {
+        var error;
+
         that.lastCommand = {
             command: args.concat(' '),
             stdout: stdout,
             stderr: stderr
         };
         if (code) {
-            return deferred.reject(new Error('Failed to execute git "' + args.join(' ') + '", exit code of #' + code, 'ECMDERR'));
+            error = new Error('Failed to execute git "' + args.join(' ') + '", exit code of #' + code, 'ECMDERR');
+            error.stdout = stdout;
+            error.stderr = stderr;
+
+            return deferred.reject(error);
         }
 
         return deferred.resolve(that);
