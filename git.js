@@ -76,12 +76,20 @@ module.exports.create = function(cwd, bare) {
     }
 };
 
-module.exports.clone = function(cwd, repo, dest) {
+module.exports.clone = function(cwd, repo, opts, dest) {
     var deferred = Q.defer(),
         args = ['clone', repo],
         working = new Git(cwd);
 
-    if (dest !== undefined) {
+    if (typeof(opts) === 'string'){
+        opts = opts.split(' ');
+    }
+
+    if (Array.isArray(opts)) {
+        args = args.concat(opts);
+    }
+
+    if (dest) {
         args.push(dest);
     }
 
