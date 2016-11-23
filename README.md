@@ -9,7 +9,7 @@ This module helps automate the release process for the Web Experience Toolkit co
 ## Install
 
 ```sh
-$ npm install node-got-simple
+$ npm install node-git-simple
 ```
 
 wet-boew-release depends on nodejs and git
